@@ -2,7 +2,7 @@
 # darktable 2.2.5 built from source
 # osm-gps-map and pugixml are built from sources
 # 
-# image size: 132 MB
+# image size: 159.4 MB
 # 
 # Build command:
 #     docker build -t darktable --build-arg UID=$(id -g ${USER}) .
@@ -12,7 +12,7 @@
 #                         -v /tmp/.docker.xauth:/tmp/.docker.xauth 
 #                         -e XAUTHORITY=/tmp/.docker.xauth
 #                         -v /var/lib/dbus/machine-id:/var/lib/dbus/machine-id
-#                         -v /mnt/host/photos:/home/darktable/photos
+#                         -v /mnt/host/photos:/home/darktable/picures
 
 # need to use alpine3.5 for openexr and gnome-common
 FROM alpine:3.5
@@ -38,6 +38,7 @@ RUN apk update \
                librsvg \
                librsvg-dev \
                sqlite-dev \
+               curl \
                curl-dev \
                libjpeg-turbo-dev \
                tiff-dev \
@@ -65,6 +66,7 @@ RUN apk update \
                openexr-dev \
                libgomp \
                ttf-dejavu \
+               adwaita-icon-theme \
     && (>&2 echo -e "\nCompiling and installing osm-gps-map ...\n") \
     && mkdir -p /tmp/osmgpsmap && cd /tmp/osmgpsmap \
     && git clone http://github.com/nzjrs/osm-gps-map \
@@ -132,4 +134,4 @@ RUN apk update \
 WORKDIR /home/darktable
 USER darktable
 
-CMD ["darktable"]
+CMD ["/opt/darktable/bin/darktable"]

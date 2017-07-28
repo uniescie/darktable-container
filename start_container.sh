@@ -10,14 +10,15 @@ DIR_OPTS="-v /mnt/host/pictures:/home/darktable/pictures"
 
 DBUS_OPTS="-v /var/lib/dbus/machine-id:/var/lib/dbus/machine-id"
 
-# DEBUG_OPTS=""
+DEBUG_OPTS=""
 
-cmd="docker run -it --rm ${DIR_OPTS}
+cmd="docker run -d --rm ${DIR_OPTS}
                          ${X_OPTS}
                          ${DBUS_OPTS}
                          ${DEBUG_OPTS}
                          --name darktable
-                         darktable"
+                         darktable
+                         "
 
 echo -e "\nStarting darktable container..."
 echo ${cmd}
