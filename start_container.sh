@@ -6,19 +6,20 @@ XAUTH=/tmp/.docker.xauth
 xauth nlist ${DISPLAY} | sed -e 's/^..../ffff/' | xauth -f ${XAUTH} nmerge -
 X_OPTS="-v ${XSOCK}:${XSOCK} -v ${XAUTH}:${XAUTH} -e XAUTHORITY=${XAUTH} -e DISPLAY"
 
-DIR_OPTS="-v /mnt/host/pictures:/home/darktable/pictures"
+DIR_OPTS="-v /mnt/host/pictures:/home/darktable/pictures
+          -v ${PWD}/config:/home/darktable/.config/darktable"
 
 DBUS_OPTS="-v /var/lib/dbus/machine-id:/var/lib/dbus/machine-id"
 
 DEBUG_OPTS=""
 
 cmd="docker run -d --rm ${DIR_OPTS}
-                         ${X_OPTS}
-                         ${DBUS_OPTS}
-                         ${DEBUG_OPTS}
-                         --name darktable
-                         darktable
-                         "
+                        ${X_OPTS}
+                        ${DBUS_OPTS}
+                        ${DEBUG_OPTS}
+                        --name darktable
+                        darktable
+                        "
 
 echo -e "\nStarting darktable container..."
 echo ${cmd}

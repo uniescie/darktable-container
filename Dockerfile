@@ -2,7 +2,7 @@
 # darktable 2.2.5 built from source
 # osm-gps-map and pugixml are built from sources
 # 
-# image size: 159.4 MB
+# image size: 160.7 MB
 # 
 # Build command:
 #     docker build -t darktable --build-arg UID=$(id -g ${USER}) .
@@ -67,6 +67,7 @@ RUN apk update \
                libgomp \
                ttf-dejavu \
                adwaita-icon-theme \
+               mesa-gl \
     && (>&2 echo -e "\nCompiling and installing osm-gps-map ...\n") \
     && mkdir -p /tmp/osmgpsmap && cd /tmp/osmgpsmap \
     && git clone http://github.com/nzjrs/osm-gps-map \
