@@ -8,15 +8,18 @@ services:
       args:
         PUID: 1000
         PGID: 1000
-        DARKTABLE_TAG: release-2.4.3
-    image: darktable-alpine:2.4.3
+        DARKTABLE_TAG: release-2.6.0
+    image: darktable-alpine:2.6.0
     container_name: darktable.docker
     environment:
       - DISPLAY=${DISPLAY}
       - XAUTHORITY=/tmp/.docker.xauth
     volumes:
-#      - ./config:/home/darktable/.config/darktable
-#      - /mnt/host/photos:/home/darktable/pictures
+      - darktable_config:/home/darktable/.config/darktable
+      - /mnt/host/photos:/home/darktable/pictures
       # Xserver socket
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /tmp/.docker.xauth:/tmp/.docker.xauth
+
+volumes:
+  darktable_config:
